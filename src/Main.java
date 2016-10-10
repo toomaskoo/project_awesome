@@ -4,9 +4,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
-
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 
 public class Main extends Application {
@@ -25,7 +23,7 @@ public class Main extends Application {
 
         Label label1 = new Label("Welcome to WYSIWYG EDITOR");
         Button uus = new Button("Start new project");
-        uus.setOnAction((event) -> {
+        uus.setOnAction((event) -> {//nupp uus teeb järgmisi toiminguid ->
             File i = new File("index.html");
             try {
                 i.createNewFile();
@@ -36,18 +34,21 @@ public class Main extends Application {
             try {
                 s.createNewFile();
             } catch (IOException e) {
-                e.printStackTrace();
+                e.printStackTrace();// IO exception vajalik, muidu ei tööta
             }
+
         });
 
-        HBox layout1 = new HBox();
-        layout1.getChildren().add(uus);
-        Scene wysiwyg = new Scene(layout1, 1024, 768);
-        primaryStage.setScene(wysiwyg);
-
-        primaryStage.show();
+        HBox layout1 = new HBox();//horisontaalne layout
+        layout1.getChildren().add(uus);//lisab layout 1 nupu uus
+        layout1.getChildren().add(label1);//tervitus 
+        Scene wysiwyg = new Scene(layout1, 1024, 768);// scene suurus 1024x768
+        primaryStage.setScene(wysiwyg);//primary stage setscene
+        primaryStage.show();//selfexplaining
 
     }
+
+
 
 
 }
