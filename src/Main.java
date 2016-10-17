@@ -1,62 +1,34 @@
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.io.File;
-import java.io.IOException;
+import java.io.FileWriter;
 
 public class Main extends Application {
+    private TextField primary = new TextField();
+    private TextField indextext = new TextField();
+    private TextField csstext = new TextField();
 
-    Stage window;
-    Scene wysiwyg, index, css, wysiwygmain;
 
-    public static void main(String[] args) {
-        launch(args);
-    }
+    FileWriter index = null;
+    FileWriter index = new FileWriter(File index.html, true);
 
     @Override
-    public void start(Stage primaryStage)  {
+    public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("WYSIWYG");
-        primaryStage.setResizable(true);
+        Pane layout = new Pane();
+        Text welcome = new Text(500, 500, "Welcome to the WYSIWYG EDITOR. Click START or RETRIEVE STARTED PROJECT");
+        welcome.setFont(new Font(50));
+        layout.getChildren().addAll(welcome);
+        layout.setCenterShape(true);
 
-
-        Label tere = new Label("Welcome to WYSIWYG EDITOR!");
-        Button uus = new Button("Start new project");
-        Object starting;
-        uus.setOnAction(event ->
-        {//nupp uus teeb järgmisi toiminguid ->
-            File i = new File("index.html");
-            try {
-                i.createNewFile();//i on index.html
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            File s = new File("styles.css");
-            try {
-                s.createNewFile();//s on Styles.css
-            } catch (IOException e) {
-                e.printStackTrace();// IO exception vajalik, muidu ei tööta
-            }
-        });
-
-        StackPane layout1 = new StackPane();//paneb keskele nupu
-        layout1.getChildren().add(uus);//lisab layout 1 nupu uus
-        Scene wysiwyg = new Scene(layout1, 1024, 768);// scene suurus 1024x768
-        primaryStage.setScene(wysiwyg);//primary stage setscene
-        primaryStage.show();//selfexplaining
-
-        HBox mainlayout = new HBox();// 2. lehekülje joondus
-        mainlayout.getChildren().add(tere);//2. lehekülje layout
-        Scene wysiwygmain = new Scene(mainlayout);//mis scene kasutusel on 2. leheküljel
+        Scene editor = new Scene(layout, 1024, 768);
+        primaryStage.show();
 
     }
-
 }
-
 
